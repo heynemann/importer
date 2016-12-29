@@ -9,3 +9,4 @@
 # Copyright (c) 2016, Bernardo Heynemann <heynemann@gmail.com>
 
 from importer.version import __version__  # NOQA
+from importer.core import Importer  # NOQA

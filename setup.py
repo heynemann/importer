@@ -24,7 +24,7 @@ tests_require = [
 ]
 
 setup(
-    name='importer',
+    name='importer-lib',
     version=__version__,
     description='Importer is a library to do dynamic importing of modules in python Edit',
     long_description='''
