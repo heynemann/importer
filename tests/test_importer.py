@@ -74,3 +74,27 @@ class ImporterTestCase(TestCase):
                 key='module',
                 module_names='invalidmodulename',
             )
+
+    def test_load_method(self):
+        importer = Importer()
+
+        importer.load(
+            {'key': 'modules', 'module_names': ('preggy', 'importer')},
+            {'key': 'classes', 'module_names': ('importer.core', 'importer.core',), 'class_name': 'Importer'},
+            {'key': 'module_a', 'module_names': 'importer'},
+            {'key': 'module_b', 'module_names': 'importer.core', 'class_name': 'Importer'},
+            {'key': 'invalid', 'module_names': 'invalid', 'ignore_errors': True},
+        )
+
+        expect(importer.modules).to_length(2)
+        expect(importer.modules[0]).to_equal(preggy)
+        expect(importer.modules[1]).to_equal(importer_mod)
+
+        expect(importer.classes).to_length(2)
+        expect(importer.classes[0]).to_equal(Importer)
+        expect(importer.classes[1]).to_equal(Importer)
+
+        expect(importer.module_a).to_equal(importer_mod)
+        expect(importer.module_b).to_equal(Importer)
+
+        expect(importer.invalid).to_be_null()

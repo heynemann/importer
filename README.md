@@ -37,3 +37,19 @@ importer.import_item(
         'module.handlers.login',
     ), class_name='Handler'
 )
+
+# Loading all modules
+# You can also specify several modules to load at once
+
+# this is the same as all the calls above combined
+importer.load(
+    {'key': 'module_a', 'module_names': 'sys'},
+    {'key': 'module_b', 'module_names': 'importer.core'},
+    {'key': 'module_c', 'module_names': 'importer.core', 'class_name': 'Importer'},
+    {'key': 'modules', 'module_names': ('importer.core', 'os', 'sys', 'preggy')},
+    {'key': 'classes', 'module_names': (
+        'module.handlers.healthcheck',
+        'module.handlers.index',
+        'module.handlers.login',
+    ), 'class_name': 'Handler'},
+)

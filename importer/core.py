@@ -42,7 +42,7 @@ class Importer:
             else:
                 raise e
 
-    def import_item(self, key, module_names, class_name=None, item_value=None, ignore_errors=False):
+    def import_item(self, key, module_names, class_name=None, ignore_errors=False):
         is_multiple = isinstance(module_names, (list, tuple))
         if is_multiple:
             modules = []
@@ -53,3 +53,18 @@ class Importer:
         else:
             module = self.try_import(module_names, class_name, ignore_errors)
             setattr(self, key.lower(), module)
+
+    def load(self, *modules):
+        for module in modules:
+            key = module['key']
+            module_names = module['module_names']
+
+            class_name = None
+            if 'class_name' in module:
+                class_name = module['class_name']
+
+            ignore_errors = False
+            if 'ignore_errors' in module:
+                ignore_errors = module['ignore_errors']
+
+            self.import_item(key, module_names, class_name, ignore_errors)
