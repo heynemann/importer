@@ -29,6 +29,3 @@ coverage-html: unit
 # run tests against all supported python versions
 tox:
 	@tox
-
-#docs:
-	#@cd importer/docs && make html && open _build/html/index.html
